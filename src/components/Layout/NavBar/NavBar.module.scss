@@ -1,0 +1,115 @@
+@use "@/assets/scss/main.scss" as *;
+
+.nav-bar {
+  background: $nav-bar;
+  color: $white;
+  width: 240px;
+  flex-shrink: 0;
+  padding-top: 20px;
+}
+
+.nav {
+  margin-bottom: 65px;
+  @include font-nav-bar;
+}
+
+.list {
+  @include reset-list;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.link {
+  @include link;
+  padding: 15px 13px 17px;
+  opacity: 0.6;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  position: relative;
+
+  &--activ {
+    opacity: 1;
+    background: $activ;
+
+    &::before {
+      content: "";
+      height: 100%;
+      width: 3px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: $blue;
+    }
+  }
+
+  &--info {
+    &::after {
+      content: "";
+      height: 6px;
+      width: 6px;
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      border-radius: 50%;
+      transform: translate(0, -50%);
+      background: $yellow-mid;
+      box-shadow: 0px 3px 8px $yellow-shadow;
+    }
+  }
+}
+
+.svg {
+  fill: $white;
+  width: 24px;
+  height: 24px;
+}
+
+.svg--logo{
+  width: 109px;
+  height: 28px;
+  margin-bottom: 32px;
+  margin-left: 12px;
+}
+
+.svg--button {
+  width: 25px;
+  height: 25px;
+
+  position: absolute;
+  top: 50%;
+  right: 23px;
+  transform: translate(0, -50%);
+}
+
+.button {
+  @include button-blue;
+  width: 200px;
+  padding: 13px 0 15px;
+  margin: 0 auto 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  &--plus {
+    .span--button {
+      position: relative;
+      right: 24px;
+    }
+  }
+
+  &--info {
+    .span--button {
+      position: relative;
+      left: -5px;
+    }
+    .svg--button {
+      right: 25px;
+    }
+  }
+  &:nth-last-child(1) {
+    margin-bottom: 0;
+  }
+}

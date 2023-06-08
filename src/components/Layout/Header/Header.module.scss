@@ -1,0 +1,60 @@
+@use "@/assets/scss/main.scss" as *;
+
+.header {
+  width: 100%;
+  padding: 14px 120px;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 5px #E9EDF3;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  white-space: nowrap;
+}
+
+.section{
+  display: flex;
+  align-items: center;
+}
+
+.date{
+  margin-right: 85px;
+  @include font-header;
+  color: $grey-text;
+}
+
+.search{
+  margin-right: 55px;
+}
+
+.list {
+  @include reset-list;
+  display: flex;
+  align-items: center;
+}
+
+.user{
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  @include font-header;
+  color: $grey-text;
+  .svg{
+    color: $grey-mid;
+  }
+}
+
+.user--menu{
+  margin-left: 47px;
+}
+
+.image{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
+}

@@ -1,0 +1,61 @@
+@use "@/assets/scss/main.scss" as *;
+
+.list{
+  @include reset-list;
+  @include font-schedule;
+  display: flex;
+  gap: 56px;
+}
+
+.item {
+  &--green {
+    .span--color {
+      color: $green-light;
+    }
+    .line {
+      background: $green-mid;
+    }
+  }
+  &--yellow {
+    .span--color {
+      color: $yellow-light;
+    }
+    .line {
+      background: $yellow-mid;
+    }
+  }
+  &--red {
+    .span--color {
+      color: $red-mid;
+    }
+    .line {
+      background: $red-mid;
+    }
+  }
+}
+
+.item--schedule {
+  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.paragraph {
+  margin: 0;
+}
+
+.schedule {
+  width: 156px;
+  height: 6px;
+  border-radius: 12px;
+  background: $grey-light;
+}
+
+.line{
+  height: 6px;
+  border-radius: 12px 0 0 12px;
+  &--full {
+    border-radius: 12px;
+  }
+}

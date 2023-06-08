@@ -1,51 +1,32 @@
+import clsx from "clsx";
 import { getDate } from "@/utils/getDate";
+import Schedule from "./components/Schedule/Schedule";
+import Search from "./components/Search/Search";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+
+import styles from "./Header.module.scss";
+
 
 const Header = () => {
   return (
-    <header>
-      <ul>
-        <li>
-          <span>{getDate()}</span>
-        </li>
-        <li>
-          <p>
-            <span>Новые звонки </span>
-            <span>20 из 30 шт</span>
-          </p>
-          <div>
-            <div></div>
-          </div>
-        </li>
-        <li>
-          <p>
-            <span>Качество разговоров </span>
-            <span>40%</span>
-          </p>
-          <div>
-            <div></div>
-          </div>
-        </li>
-        <li>
-          <p>
-            <span>Конверсия в заказ </span>
-            <span>67%</span>
-          </p>
-          <div>
-            <div></div>
-          </div>
-        </li>
-        <li>
-          <input type="search" />
-        </li>
-        <li>
+    <header className={styles.header}>
+      <section className={styles.section}>
+        <span className={styles.date}>{getDate()}</span>
+        <Schedule />
+      </section>
+      <section className={styles.section}>
+        <div className={styles.search}>
+          <Search />
+        </div>
+        <div className={styles.user}>
           <span>ИП Сидорова Александра Михайловна</span>
-          {/* svg */}
-        </li>
-        <li>
-          <img width="30px" height="30px" src="https://placebeard.it/640x360" alt="" />
-          {/* svg */}
-        </li>
-      </ul>
+          <KeyboardArrowDownIcon className={styles.svg} />
+        </div>
+        <div className={clsx(styles.user, styles["user--menu"])}>
+          <img className={styles.image} src="https://placebeard.it/640x360" alt="" />
+          <KeyboardArrowDownIcon className={styles.svg} />
+        </div>
+      </section>
     </header>
   )
 }
