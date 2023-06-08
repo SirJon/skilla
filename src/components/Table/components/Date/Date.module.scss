@@ -1,0 +1,29 @@
+@use "@/assets/scss/main.scss" as *;
+
+.date{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.button{
+  @include button-reset;
+  color: $grey-mid;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.value{
+  color: $blue;
+}
+
+.menu{
+  .MuiPaper-root {
+    
+    background: tomato !important;
+  }
+  ul {
+    @include list-reset;
+  }
+}

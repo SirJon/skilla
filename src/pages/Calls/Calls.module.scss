@@ -1,0 +1,9 @@
+@use "@/assets/scss/main.scss" as *;
+
+.calls{
+  padding: 20px 120px;
+}
+
+.title{
+  @include visually-hidden;
+}

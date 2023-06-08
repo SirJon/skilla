@@ -1,0 +1,19 @@
+@use "@/assets/scss/main.scss" as *;
+
+.button {
+  @include button-reset;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  @include font-standart;
+  color: $text-secondary;
+}
+
+.svg{
+  color: $grey-mid;
+}
+
+.item {
+  @include font-standart;
+  color: $text-secondary;
+}

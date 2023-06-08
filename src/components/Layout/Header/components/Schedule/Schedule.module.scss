@@ -1,8 +1,8 @@
 @use "@/assets/scss/main.scss" as *;
 
 .list{
-  @include reset-list;
-  @include font-schedule;
+  @include list-reset;
+  @include font-standart;
   display: flex;
   gap: 56px;
 }

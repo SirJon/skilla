@@ -1,10 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
-import App from "@/components/App/App";
+import App from "@/pages/App/App";
+import Calls from "@/pages/Calls/Calls";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    children: [],
+    children: [
+      {
+        path: "calls",
+        element: <Calls/>,
+      },
+    ],
   },
 ]);

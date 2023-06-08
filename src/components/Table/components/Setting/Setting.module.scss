@@ -1,0 +1,28 @@
+@use "@/assets/scss/main.scss" as *;
+
+.setting {
+  display: flex;
+  gap: 32px;
+}
+
+.search{
+  position: relative;
+  margin-right: auto;
+}
+
+.input--search{
+  padding: 10px 30px;
+  border-radius: 48px;
+  background: transparent;
+  border: none;
+  @include font-input;
+  color: $text-secondary;
+}
+
+.svg--search{
+  position: absolute;
+  left: 0px;
+  top: 50%;
+  transform: translate(0, -50%);
+  color: $grey-mid;
+}

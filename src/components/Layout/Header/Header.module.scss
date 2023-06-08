@@ -29,7 +29,7 @@
 }
 
 .list {
-  @include reset-list;
+  @include list-reset;
   display: flex;
   align-items: center;
 }

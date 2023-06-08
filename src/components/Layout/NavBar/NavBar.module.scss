@@ -6,6 +6,7 @@
   width: 240px;
   flex-shrink: 0;
   padding-top: 20px;
+  box-sizing: border-box;
 }
 
 .nav {
@@ -14,7 +15,7 @@
 }
 
 .list {
-  @include reset-list;
+  @include list-reset;
 
   display: flex;
   flex-direction: column;

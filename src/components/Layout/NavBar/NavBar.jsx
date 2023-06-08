@@ -1,11 +1,12 @@
 import clsx from "clsx";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import styles from "./NavBar.module.scss";
 
 import sprite from "@/assets/svg/sprite.svg";
 
 const NavBar = () => {
+  const { pathname } = useLocation();
   return (
     <section className={styles["nav-bar"]}>
       <svg className={styles["svg--logo"]}>
@@ -50,11 +51,14 @@ const NavBar = () => {
             </Link>
           </li>
           <li className={styles.item}>
-            <Link className={clsx({
-              [styles.link]: true,
-              [styles["link--activ"]]: true,
-              [styles["link--info"]]: true,
-            })}>
+            <Link
+              className={clsx({
+                [styles.link]: true,
+                [styles["link--activ"]]: pathname === "/calls",
+                [styles["link--info"]]: true,
+              })}
+              to="/calls"
+            >
               <svg className={styles.svg}>
                 <use xlinkHref={`${sprite}#calls`}></use>
               </svg>

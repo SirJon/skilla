@@ -10,7 +10,7 @@ const App = () => {
       <NavBar />
       <div className={styles.wrapper}>
         <Header />
-        <main>
+        <main className={styles.main}>
           <Outlet />
         </main>
       </div>
