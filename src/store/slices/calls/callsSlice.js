@@ -6,8 +6,24 @@ const token = 'testtoken';
 
 const nameSlice = 'calls';
 
+function hashCalls(dateArray) {
+  const result = {};
+  for (const it of dateArray) {
+    const { date } = it;
+    const currentDay = new Date(date);
+    currentDay.setHours(0, 0, 0, 0);
+    if (!result[currentDay]) {
+      result[currentDay] = [it];
+    } else {
+      result[currentDay].push(it);
+    }
+  }
+  return result;
+};
+
 const initialState = {
   calls: [],
+  hash: {},
   status: 'loading',
   error: null,
   periodStart: null,
@@ -34,7 +50,10 @@ export const callsSlice = createSlice({
       })
       .addCase(fetchCalls.fulfilled, (state, { payload }) => {
         state.status = FETCH_STATUS.fulfilled;
-        state.calls = Array.isArray(payload.results) ? payload.results : [];
+        if (Array.isArray(payload.results)) {
+          state.calls = payload.results;
+          state.hash = hashCalls(payload.results);
+        }
       })
       .addCase(fetchCalls.rejected, (state, action) => {
         state.status = FETCH_STATUS.rejected;

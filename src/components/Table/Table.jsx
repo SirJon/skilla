@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchCalls } from "@/store/slices/calls/callsSlice";
@@ -7,6 +7,7 @@ import Balance from "@/components/Balance/Balance"
 import Date from "./components/Date/Date";
 import Setting from "./components/Setting/Setting";
 import TableData from "./components/TableData/TableData";
+import Title from "./components/Title/Title";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
@@ -20,8 +21,9 @@ const Table = () => {
     dispatch(fetchCalls())
   }, []);
 
-  const { calls, status } = useSelector(state => state.calls);
-  if (status !== FETCH_STATUS.fulfilled)  return (
+  const { calls, status, hash } = useSelector(state => state.calls);
+
+  if (status !== FETCH_STATUS.fulfilled) return (
     <Box sx={{ display: 'flex' }}>
       <CircularProgress />
     </Box>
@@ -51,9 +53,18 @@ const Table = () => {
           </tr>
         </thead>
         <tbody className={styles["table__body"]}>
-          {calls.map(it => (
-            <TableData key={it.id} {...it} />
-          ))}
+          {Object.keys(hash).map((hashKey, i) => {
+            return (
+              <Fragment key={hashKey}>
+                {i !== 0 && <Title date={hashKey} badge={hash[hashKey].length} />}
+                {hash[hashKey].map(it => {
+                  return (
+                    <TableData key={it.id} {...it} />
+                  )
+                })}
+              </Fragment>
+            )
+          })}
         </tbody>
       </table>
     </article>

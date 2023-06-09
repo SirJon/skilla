@@ -21,6 +21,8 @@
 }
 
 .svg {
+  width: 20px !important;
+  height: 20px !important;
   &--green {
     color: $green-mid;
   }
@@ -44,4 +46,11 @@
   &--noscript {
     color: $red-mid;
   }
+}
+
+.avatar{
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
 }
