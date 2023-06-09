@@ -7,3 +7,30 @@
   gap: 40px;
   margin-bottom: 34px;
 }
+
+.table {
+  padding: 25px 40px 75px;
+  width: 100%;
+  text-align: left;
+
+  background: $white;
+  box-shadow: 0px 4px 5px #e9edf3;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.table__header {
+  @include font-standart;
+  color: $grey-text;
+  width: 100%;
+}
+
+.table__head{
+  @include table;
+}
+
+.text-right {
+  text-align: right;
+}

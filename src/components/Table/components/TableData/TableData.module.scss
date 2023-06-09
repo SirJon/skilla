@@ -1,0 +1,47 @@
+@use "@/assets/scss/main.scss" as *;
+
+.head{
+  @include table;
+  padding: 16px 0;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: $white-line;
+  }
+}
+
+.text-right {
+  text-align: right;
+}
+
+.svg {
+  &--green {
+    color: $green-mid;
+  }
+  &--blue {
+    color: $blue-light;
+  }
+  &--fail {
+    color: $red-mid;
+  }
+}
+
+.source{
+  @include font-mid;
+  color: $text-secondary;
+}
+
+.errors{
+  &--noerrors {
+    color: $green-mid;
+  }
+  &--noscript {
+    color: $red-mid;
+  }
+}

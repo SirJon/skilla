@@ -20,7 +20,7 @@
 
 .date{
   margin-right: 85px;
-  @include font-header;
+  @include font-mid;
   color: $grey-text;
 }
 
@@ -40,7 +40,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  @include font-header;
+  @include font-mid;
   color: $grey-text;
   .svg{
     color: $grey-mid;

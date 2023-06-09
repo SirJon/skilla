@@ -2,7 +2,7 @@
   font-family: "SF Pro Display", sans-serif;
 }
 
-@mixin font-header {
+@mixin font-mid {
   @include font-family-main;
   font-style: normal;
   font-weight: 400;
@@ -78,4 +78,11 @@
   overflow: hidden;
   border: 0;
   clip: rect(0 0 0 0);
+}
+
+@mixin table {
+  display: grid;
+  grid-template-columns: 25px 45px 80px 2fr 1fr 175px 2fr;
+  gap: 30px;
+  align-items: center;
 }
