@@ -1,10 +1,12 @@
 import { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { setPeriod } from '@/store/slices/calls/callsSlice';
+import { TABLE_PERIOD } from '@/constant/table_period';
 
 import { fetchCalls } from "@/store/slices/calls/callsSlice";
 
 import Balance from "@/components/Balance/Balance"
-import Date from "./components/Date/Date";
+import DateComponent from "./components/Date/Date";
 import Setting from "./components/Setting/Setting";
 import TableData from "./components/TableData/TableData";
 import Title from "./components/Title/Title";
@@ -15,13 +17,36 @@ import { FETCH_STATUS } from "@/constant/fetch_status";
 
 import styles from "./Table.module.scss";
 
+function hashCalls(dateArray) {
+  const result = {};
+  for (const it of dateArray) {
+    const { date } = it;
+    const currentDay = new Date(date);
+    currentDay.setHours(0, 0, 0, 0);
+    if (!result[currentDay]) {
+      result[currentDay] = [it];
+    } else {
+      result[currentDay].push(it);
+    }
+  }
+  return result;
+};
+
 const Table = () => {
   const dispatch = useDispatch();
+  const { status, periodStart, periodEnd, list } = useSelector(state => state.calls);
+  const currentList = list.filter(it => {
+    return (new Date(periodEnd) - new Date(it.date) >= 0 && new Date(it.date) - new Date(periodStart) > 0)
+  });
+  const hash = hashCalls(currentList);
   useEffect(() => {
-    dispatch(fetchCalls())
+    if (status !== FETCH_STATUS.fulfilled) {
+      dispatch(fetchCalls());
+    };
   }, []);
-
-  const { calls, status, hash } = useSelector(state => state.calls);
+  useEffect(() => {
+    dispatch(setPeriod(TABLE_PERIOD.THREE_DAY))
+  }, []);
 
   if (status !== FETCH_STATUS.fulfilled) return (
     <Box sx={{ display: 'flex' }}>
@@ -34,7 +59,7 @@ const Table = () => {
       <header>
         <div className={styles.up}>
           <Balance />
-          <Date />
+          <DateComponent />
         </div>
         <div>
           <Setting />
@@ -53,22 +78,25 @@ const Table = () => {
           </tr>
         </thead>
         <tbody className={styles["table__body"]}>
-          {Object.keys(hash).map((hashKey, i) => {
-            return (
-              <Fragment key={hashKey}>
-                {i !== 0 && <Title date={hashKey} badge={hash[hashKey].length} />}
-                {hash[hashKey].map(it => {
-                  return (
-                    <TableData key={it.id} {...it} />
-                  )
-                })}
-              </Fragment>
-            )
-          })}
+          {!!currentList.length
+            ? Object.keys(hash).map((hashKey, i) => {
+              return (
+                <Fragment key={hashKey}>
+                  {i !== 0 && <Title title={hashKey} badge={hash[hashKey].length} />}
+                  {hash[hashKey].map(it => {
+                    return (
+                      <TableData key={it.id} {...it} />
+                    )
+                  })}
+                </Fragment>
+              )
+            })
+            : <Title title="В данном диапазоне нет звонков" />
+          }
         </tbody>
       </table>
     </article>
   )
-}
+};
 
-export default Table
+export default Table;

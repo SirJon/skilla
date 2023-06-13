@@ -6,28 +6,14 @@ const token = 'testtoken';
 
 const nameSlice = 'calls';
 
-function hashCalls(dateArray) {
-  const result = {};
-  for (const it of dateArray) {
-    const { date } = it;
-    const currentDay = new Date(date);
-    currentDay.setHours(0, 0, 0, 0);
-    if (!result[currentDay]) {
-      result[currentDay] = [it];
-    } else {
-      result[currentDay].push(it);
-    }
-  }
-  return result;
-};
-
 const initialState = {
-  calls: [],
-  hash: {},
-  status: 'loading',
-  error: null,
+  periodTitle: null,
   periodStart: null,
   periodEnd: null,
+  periodText: null,
+  list: [],
+  status: 'loading',
+  error: null,
 };
 
 export const fetchCalls = createAsyncThunk(
@@ -42,6 +28,12 @@ export const callsSlice = createSlice({
   name: nameSlice,
   initialState,
   reducers: {
+    setPeriod: (state, { payload }) => {
+      state.periodText = payload.text;
+      state.periodTitle = payload.title;
+      state.periodStart = payload.start;
+      state.periodEnd = payload.end;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -51,8 +43,7 @@ export const callsSlice = createSlice({
       .addCase(fetchCalls.fulfilled, (state, { payload }) => {
         state.status = FETCH_STATUS.fulfilled;
         if (Array.isArray(payload.results)) {
-          state.calls = payload.results;
-          state.hash = hashCalls(payload.results);
+          state.list = payload.results;
         }
       })
       .addCase(fetchCalls.rejected, (state, action) => {
@@ -61,6 +52,8 @@ export const callsSlice = createSlice({
   },
 })
 
-export const { } = callsSlice.actions
+export const {
+  setPeriod,
+} = callsSlice.actions;
 
-export default callsSlice.reducer
+export default callsSlice.reducer;

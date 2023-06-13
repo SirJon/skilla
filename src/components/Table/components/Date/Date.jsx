@@ -1,15 +1,21 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPeriod } from '@/store/slices/calls/callsSlice';
+import { TABLE_PERIOD } from '@/constant/table_period';
 
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+
+import DateItem from './components/DateItem';
+import DateItemRange from './components/DateItemRange';
 
 import styles from "./Date.module.scss";
-import clsx from 'clsx';
 
 const Date = () => {
+  const dispatch = useDispatch();
+  const { periodText } = useSelector(state => state.calls);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (e) => {
@@ -25,7 +31,9 @@ const Date = () => {
       </button>
       <button className={styles.button} onClick={handleClick}>
         <CalendarTodayIcon />
-        <span className={styles.value}>3 дня</span>
+        <span className={styles.value}>
+          {periodText}
+        </span>
       </button>
       <button className={styles.button}>
         <KeyboardArrowRightIcon />
@@ -37,14 +45,22 @@ const Date = () => {
         className={styles.menu}
         variant="selectedMenu"
       >
-        <MenuItem onClick={handleClose}>3 дня</MenuItem>
-        <MenuItem onClick={handleClose}>Неделя</MenuItem>
-        <MenuItem onClick={handleClose}>Месяц</MenuItem>
-        <MenuItem onClick={handleClose}>Год</MenuItem>
-        <MenuItem onClick={handleClose}>Указать даты</MenuItem>
+        {Object.keys(TABLE_PERIOD).map(it => {
+          return (
+            <DateItem
+              key={it}
+              handleClose={handleClose}
+              onClick={() => dispatch(setPeriod(TABLE_PERIOD[it]))}
+              title={TABLE_PERIOD[it].text}
+            />
+          )
+        })}
+        <DateItemRange
+          handleClose={handleClose}
+        />
       </Menu>
     </div>
   )
-}
+};
 
-export default Date
+export default Date;

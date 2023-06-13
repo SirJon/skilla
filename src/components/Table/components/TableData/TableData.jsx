@@ -41,7 +41,7 @@ const TableData = (props) => {
         {getTimeString(date)}
       </td>
       <td>
-        <img className={styles.avatar} src={person_avatar} alt="avatar" />
+        <img className={styles.avatar} src={!!person_avatar ? person_avatar : 'https://lk.skilla.ru/img/noavatar.jpg'} alt="avatar" />
       </td>
       <td>{createPhoneNumber(from_number)}</td>
       <td className={styles.source}>{source}</td>
